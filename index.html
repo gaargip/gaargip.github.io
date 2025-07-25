@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Examination Hall</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <div id="left-div">
+            <div id="current-time"></div>
+            <div class="info-block">
+                IELTS TEST<br>
+                Date: <span class="bold-red" id="current-date" contenteditable="true"></span><br>
+                Center No. <span class="bold-red" contenteditable="true">CA073</span><br>
+                <span contenteditable="true">GEORGE BROWN COLLEGE IELTS CENTRE</span><br>
+                START: <input type="time" id="start-time-input" class="native-time-input" value=""><br>
+                FINISH: <input type="time" id="finish-time-input" class="native-time-input" value=""><br>
+                
+                <div id="time-checkpoints">
+                    <span class="checkpoint-label">40 Mins :</span> <span id="finish-minus-40">--:-- --</span>
+                    <span class="checkpoint-label">20 Mins :</span> <span id="finish-minus-20">--:-- --</span>
+                    <span class="checkpoint-label">10 Mins :</span> <span id="finish-minus-10">--:-- --</span>
+                    <span class="checkpoint-label">5 Mins :</span> <span id="finish-minus-5">--:-- --</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="right-div">
+            <div class="nav-buttons">
+                <button id="btn-home" class="main-nav-btn" onclick="goHome()">Home</button>
+                <button id="btn-listening" class="main-nav-btn" onclick="loadPage('Listening')">Listening</button>
+                <button id="btn-reading" class="main-nav-btn" onclick="loadPage('Reading')">Reading</button>
+                <button id="btn-writing" class="main-nav-btn" onclick="loadPage('Writing')">Writing</button>
+            </div>
+            
+            <div id="page-content">
+                </div>
+        </div>
+    </div>
+
+    <audio id="timer-alarm" preload="auto"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>

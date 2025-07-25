@@ -1,0 +1,133 @@
+/* General Body and Layout Styling */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f0f2f5;
+    overflow: hidden;
+}
+
+.app-container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Left Division Styling */
+/* UPDATED: Changed to a vertical flex layout */
+#left-div {
+    width: 40%;
+    background-color: #002147;
+    color: white;
+    display: flex;
+    flex-direction: column; /* Lays items out top-to-bottom */
+    justify-content: center; /* Centers the group vertically */
+    align-items: center;
+    text-align: center;
+    position: relative;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* UPDATED: Removed absolute positioning to keep it in the layout flow */
+#current-time {
+    font-size: 3vw;
+    font-weight: bold;
+    margin-bottom: 20px; /* Add some space below the time */
+}
+
+.info-block {
+    font-size: 2.5vw;
+    line-height: 1.8;
+    outline: none;
+}
+
+.bold-red {
+    font-weight: bold;
+    color: #ff4136;
+}
+
+.native-time-input {
+    background-color: #001a36;
+    color: white;
+    border: 1px solid #4a6a8b;
+    border-radius: 5px;
+    padding: 0 5px;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+}
+
+.native-time-input::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+#time-checkpoints {
+    margin-top: 20px;
+    font-size: 0.5em;
+    line-height: 1.8;
+    color: #ccc;
+    font-weight: normal;
+}
+
+.checkpoint-label {
+    font-size: 0.85em;
+    color: #aaa;
+}
+
+#time-checkpoints span {
+    font-weight: normal;
+    color: white;
+}
+
+/* Right Division Styling */
+#right-div {
+    width: 60%;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+}
+
+.nav-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.nav-buttons button {
+    padding: 10px 25px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    background-color: #f8f8f8;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.nav-buttons button:hover {
+    background-color: #e0e0e0;
+}
+
+.nav-buttons button.active-nav-btn {
+    background-color: #002147;
+    color: white;
+    border-color: #002147;
+}
+
+
+#page-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+/* --- TEST PAGE STYLES --- */
+.test-page-wrapper{width:100%;height:100%;display:flex;flex-direction:column}.timer-container{width:100%;display:flex;flex-direction:column;align-items:center;gap:20px;padding-bottom:20px;border-bottom:1px solid #eee}.timer-display-wrapper{display:flex;align-items:center;gap:15px}#timer-display{font-size:100px;font-weight:300;color:#333;letter-spacing:2px}.font-controls{display:flex;flex-direction:column;gap:5px}.font-btn{width:30px;height:30px;font-size:18px;font-weight:bold;border:1px solid #ccc;border-radius:5px;background-color:#f8f8f8;cursor:pointer}.timer-inputs{display:flex;flex-direction:column;gap:15px;align-items:center}.input-row{display:flex;gap:10px;align-items:center}.input-row label{font-weight:500;color:#555}.input-row input{width:60px;padding:8px;font-size:16px;text-align:center;border:1px solid #ddd;border-radius:5px}.timer-controls{display:flex;justify-content:center;align-items:center;gap:10px}.timer-btn{padding:10px 25px;font-size:16px;cursor:pointer;border-radius:5px;border:1px solid #ccc;background-color:#f8f8f8;transition:all .2s ease}.timer-btn:hover{background-color:#e8e8e8;border-color:#bbb}.timer-btn.start-btn{background-color:#28a745;color:white;border-color:#28a745}.timer-btn.stop-btn{background-color:#dc3545;color:white;border-color:#dc3545}.instructions-section{padding:20px;font-size:1.2em;line-height:1.7;flex-grow:1;outline:none;cursor:text;overflow-y:auto}.instructions-section h2{margin-top:0;border-bottom:1px solid #eee;padding-bottom:10px}
+
+/* --- Slideshow styles --- */
+.slideshow-wrapper{width:100%;display:flex;flex-direction:column;align-items:center;gap:20px}#slideshow-container{width:90%;max-width:800px;position:relative}.slide{width:100%;display:none}#slideshow-controls{display:flex;align-items:center;gap:15px}.control-btn{background-color:#f0f0f0;border:1px solid #ccc;border-radius:50%;width:40px;height:40px;font-size:20px;cursor:pointer;display:flex;justify-content:center;align-items:center;transition:background-color .3s}.control-btn:hover{background-color:#e0e0e0}#progress-bar{display:flex;gap:10px;align-items:center}.progress-dot{width:12px;height:12px;background-color:#ccc;border-radius:50%;cursor:pointer;transition:background-color .3s}.progress-dot.active{background-color:#007bff}
