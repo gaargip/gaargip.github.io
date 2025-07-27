@@ -74,25 +74,28 @@ function loadPage(e) {
      </div>
      </div>`}t.innerHTML = l, timerInterval && updateTimerDisplay()
 }
-
 // --- Slideshow Functionality ---
-function initializeSlideshow() { isSlideshowPaused = !1; slideIndex = 0; const e = document.querySelectorAll(".slide"), t = document.getElementById("progress-bar"); t.innerHTML = ""; e.forEach((e, l) => { const n = document.createElement("div"); n.classList.add("progress-dot"), n.addEventListener("click", () => jumpToSlide(l)), t.appendChild(n) }), document.getElementById("pause-play-btn").addEventListener("click", togglePausePlay), document.getElementById("next-btn").addEventListener("click", nextSlide), document.getElementById("prev-btn").addEventListener("click", prevSlide), showSlide(), resetAndPlay() }
-function resetAndPlay() { clearTimeout(slideshowTimeout), isSlideshowPaused || (slideshowTimeout = setTimeout(() => { slideIndex++, showSlide(), resetAndPlay() }, SLIDESHOW_INTERVAL)) }
-function showSlide() { const e = document.querySelectorAll(".slide"), t = document.querySelectorAll(".progress-dot"); if (0 !== e.length) { slideIndex >= e.length && (slideIndex = 0), slideIndex < 0 && (slideIndex = e.length - 1), e.forEach(e => e.style.display = "none"), t.forEach(e => e.classList.remove("active")), e[slideIndex].style.display = "block", t[slideIndex].classList.add("active") } }
-function togglePausePlay() { isSlideshowPaused = !isSlideshowPaused; const e = document.getElementById("pause-play-btn"); e.innerHTML = isSlideshowPaused ? "▶︎" : "||", isSlideshowPaused ? clearTimeout(slideshowTimeout) : resetAndPlay() }
-function nextSlide() { slideIndex++, showSlide(), resetAndPlay() }
-function prevSlide() { slideIndex--, showSlide(), resetAndPlay() }
-function jumpToSlide(e) { slideIndex = e, showSlide(), resetAndPlay() }
+function initializeSlideshow(){isSlideshowPaused=!1;slideIndex=0;const e=document.querySelectorAll(".slide"),t=document.getElementById("progress-bar");t.innerHTML="";e.forEach((e,l)=>{const n=document.createElement("div");n.classList.add("progress-dot"),n.addEventListener("click",()=>jumpToSlide(l)),t.appendChild(n)}),document.getElementById("pause-play-btn").addEventListener("click",togglePausePlay),document.getElementById("next-btn").addEventListener("click",nextSlide),document.getElementById("prev-btn").addEventListener("click",prevSlide),showSlide(),resetAndPlay()}
+function resetAndPlay(){clearTimeout(slideshowTimeout),isSlideshowPaused||(slideshowTimeout=setTimeout(()=>{slideIndex++,showSlide(),resetAndPlay()},SLIDESHOW_INTERVAL))}
+function showSlide(){const e=document.querySelectorAll(".slide"),t=document.querySelectorAll(".progress-dot");if(0!==e.length){slideIndex>=e.length&&(slideIndex=0),slideIndex<0&&(slideIndex=e.length-1),e.forEach(e=>e.style.display="none"),t.forEach(e=>e.classList.remove("active")),e[slideIndex].style.display="block",t[slideIndex].classList.add("active")}}
+function togglePausePlay(){isSlideshowPaused=!isSlideshowPaused;const e=document.getElementById("pause-play-btn");e.innerHTML=isSlideshowPaused?"▶︎":"||",isSlideshowPaused?clearTimeout(slideshowTimeout):resetAndPlay()}
+function nextSlide(){slideIndex++,showSlide(),resetAndPlay()}
+function prevSlide(){slideIndex--,showSlide(),resetAndPlay()}
+function jumpToSlide(e){slideIndex=e,showSlide(),resetAndPlay()}
 
 // --- Timers and Clocks ---
-
-// UPDATED: Replaced populateTimeDropdowns with new checkpoint logic
 function calculateCheckpoints() {
     const finishTimeInput = document.getElementById('finish-time-input');
-    if (!finishTimeInput.value) return; // Exit if no time is set
+    if (!finishTimeInput.value) { // Exit if no time is set
+        const checkpointsToClear = [40, 20, 10, 5];
+        checkpointsToClear.forEach(mins => {
+            document.getElementById(`finish-minus-${mins}`).textContent = '--:-- --';
+        });
+        return;
+    }
 
     const [hour, minute] = finishTimeInput.value.split(':').map(Number);
-
+    
     const finishDate = new Date();
     finishDate.setHours(hour, minute, 0, 0);
 
@@ -109,7 +112,7 @@ function formatTime(date) {
     let m = date.getMinutes();
     const ampm = h >= 12 ? 'PM' : 'AM';
     h = h % 12;
-    h = h ? h : 12; // The hour '0' should be '12'
+    h = h ? h : 12;
     return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')} ${ampm}`;
 }
 
@@ -140,6 +143,28 @@ function changeFontSize(amount) {
 }
 
 function startTimer() {
+    // ADDED: Logic to auto-populate Start and Finish times
+    const startTime = new Date();
+    const finishTime = new Date(startTime.getTime() + 60 * 60 * 1000); // Add 1 hour
+
+    const startTimeInput = document.getElementById('start-time-input');
+    const finishTimeInput = document.getElementById('finish-time-input');
+
+    if (startTimeInput && finishTimeInput) {
+        // Format for <input type="time"> which requires HH:mm (24-hour format)
+        const startHours = String(startTime.getHours()).padStart(2, '0');
+        const startMinutes = String(startTime.getMinutes()).padStart(2, '0');
+        const finishHours = String(finishTime.getHours()).padStart(2, '0');
+        const finishMinutes = String(finishTime.getMinutes()).padStart(2, '0');
+
+        startTimeInput.value = `${startHours}:${startMinutes}`;
+        finishTimeInput.value = `${finishHours}:${finishMinutes}`;
+        
+        // After setting the finish time, recalculate the checkpoints
+        calculateCheckpoints();
+    }
+    // --- End of new logic ---
+
     const hours = parseInt(document.getElementById('total-hours-input').value) || 0;
     const minutes = parseInt(document.getElementById('total-minutes-input').value) || 0;
     const totalSeconds = (hours * 3600) + (minutes * 60);
@@ -167,11 +192,11 @@ function playAlarm(soundFile) {
 }
 
 function updateTimerDisplay() {
-    if (!endTime) return;
+    if (!endTime) return; 
 
     const remaining = endTime - Date.now();
     const secondsLeft = Math.round(remaining / 1000);
-
+    
     const timerDisplay = document.getElementById('timer-display');
     if (timerDisplay) {
         const hours = Math.floor(secondsLeft / 3600);
@@ -182,14 +207,14 @@ function updateTimerDisplay() {
 
     if (secondsLeft < 0) {
         playAlarm('Alarm0.mp3');
-        stopTimer();
+        stopTimer(); 
         return;
     }
-
+    
     const timerContainer = document.querySelector('.timer-container');
     const alarmPrefix = timerContainer ? timerContainer.dataset.alarmPrefix : null;
     const seconds = secondsLeft % 60;
-
+    
     if (alarmPrefix && seconds === 0) {
         const minutes = Math.floor((secondsLeft % 3600) / 60);
         const alarmVal1 = parseInt(document.getElementById('alarm-input-1').value);
