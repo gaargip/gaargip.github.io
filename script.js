@@ -43,34 +43,14 @@ function loadPage(e) {
         case "Listening": l = `\n                
     <div class="test-page-wrapper">\n                    
     <div class="instructions-section" contenteditable="true">\n                        
-    <h2>Listening Test Instructions</h2>\n                        
-    <ul>\n                            
-    <li>Make sure that you write on the Listening side of the Answer Sheet, which is <span style="color: green;"><b>Highlighted in green</b></span>.</li>\n                            
-    <li>You must use a pen provided.</li>\n                            
-    <li>Write your full name in capital letters exactly as it appears in your Passport and your desk label</li>\n                            
-    <li>The Listening Test will take about 30 minutes. Remember, no bathroom breaks are permitted during the Listening Test.</li>\n                           
-     <li>The CD will give you 10 minutes at the end to transfer your answers to the Answer Sheet.</li>\n                            
-     <li>As you listen to the recording, write your answers in the Question Booklet.</li>\n                            
-     <li>At the end of the test, if you continue to write after you have been asked to stop, you may not receive a Test Report Form.</li>\n                            
-     <li>You do not lose marks for wrong answers, so try to answer all questions.</li>\n                        
-     </ul>\n                    </div>\n                
+    <h2>Good Luck!!</h2>\n                        
+           </div>\n                
      </div>`; break; case "Reading": l = `<div class="test-page-wrapper">${n("alarm")}
-     <div class="instructions-section" contenteditable="true"><h2>Reading Test Instructions</h2>
-     <ul>
-     <li>Make sure that you write on the Listening side of the Answer Sheet, which is <span style="color: blue;"><b>Highlighted in Blue</b></span>.</li>
-<li>You have 60 minutes to complete the test.</li>
-<li>No Extra time will be given at the end to transfer your answers to the answer sheet</li>
-<li>At the end of the test if you continue to write after you have been asked to stop, you may not receive a Test Report Form.</li>
-     </ul></div>
+     <div class="instructions-section" contenteditable="true"><h2>Good Luck!!</h2>
+     </div>
      </div>`; break; case "Writing": l = `<div class="test-page-wrapper">${n("walarm")}
-     <div class="instructions-section" contenteditable="true"><h2>Writing Test Instructions</h2>
-     <ul>
-      <li>You have 60 Minutes to do the test.</li>
- <li>This test consists of 2 tasks, Task 1 and Task 2</li>
- <li>It is very important to use the correct Answer Sheet for each task</li>
- <li><b>Task 1</b> Answer sheet has a <span style="color: red;"><b>Red outline.</b></li>
- <li><b>Task 2</b> Answer sheet has a <b>Black outline.</b></li
-     </ul>
+     <div class="instructions-section" contenteditable="true"><h2>Good Luck!!</h2>
+     
      </div>
      </div>`}t.innerHTML = l, timerInterval && updateTimerDisplay()
 }
@@ -228,3 +208,4 @@ function updateTimerDisplay() {
         if (minutes === alarmVal4) playAlarm(`${alarmPrefix}40.mp3`);
     }
 }
+
